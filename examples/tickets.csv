@@ -1,0 +1,9 @@
+ticket_id,title,description,status,priority,requester_email,assignee,created_at,resolved_at
+INC-1001,VPN client cannot connect,"User sees timeout.
+Phone: +1 202 555 0147",new,p2,alex@example.test,Sam Lee,2026-07-20 08:15:00,
+INC-1002,Password reset completed,Account access restored,solved,p3,casey@example.test,Jordan Kim,20.07.2026 09:00,20.07.2026 09:24
+INC-1003,VPN client cannot connect!,Same requester reports the same symptom,working,p2,alex@example.test,Sam Lee,2026-07-20 10:30:00,
+INC-1002,Duplicate ticket ID,Duplicate export row,closed,p4,user@example.test,Jordan Kim,2026-07-20 11:00:00,2026-07-20 11:15:00
+INC-1005,Database timeout,Escalated to platform team,new,p1,pat@example.test,Robin Park,not-a-date,
+INC-1006,Incorrect resolution order,Resolution predates creation,closed,p3,taylor@example.test,Robin Park,2026-07-22 12:00:00,2026-07-22 11:00:00
+,,,,,,,,

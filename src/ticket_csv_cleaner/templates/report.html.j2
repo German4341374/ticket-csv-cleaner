@@ -1,0 +1,222 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ticket CSV quality report</title>
+    <style>
+      :root {
+        color-scheme: light;
+        --ink: #172033;
+        --muted: #667085;
+        --line: #e5e7eb;
+        --panel: #ffffff;
+        --canvas: #f4f7fb;
+        --accent: #3157d5;
+        --success: #18864b;
+        --warning: #b26800;
+        --danger: #c33737;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--canvas);
+        color: var(--ink);
+        font: 15px/1.5 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      }
+      main {
+        width: min(1100px, calc(100% - 32px));
+        margin: 40px auto;
+      }
+      header,
+      section {
+        padding: 24px;
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        background: var(--panel);
+        box-shadow: 0 8px 28px rgb(23 32 51 / 6%);
+      }
+      header {
+        display: flex;
+        justify-content: space-between;
+        gap: 24px;
+        align-items: center;
+      }
+      h1,
+      h2 {
+        margin: 0;
+      }
+      h1 {
+        font-size: 26px;
+      }
+      h2 {
+        margin-bottom: 16px;
+        font-size: 18px;
+      }
+      p {
+        margin: 6px 0 0;
+        color: var(--muted);
+      }
+      .score {
+        min-width: 132px;
+        color: var(--accent);
+        font-size: 30px;
+        font-weight: 750;
+        text-align: right;
+      }
+      .score small {
+        display: block;
+        color: var(--muted);
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px;
+        margin: 18px 0;
+      }
+      .card {
+        padding: 18px;
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        background: var(--panel);
+      }
+      .card span {
+        color: var(--muted);
+        font-size: 12px;
+        text-transform: uppercase;
+        letter-spacing: 0.06em;
+      }
+      .card strong {
+        display: block;
+        margin-top: 8px;
+        font-size: 26px;
+      }
+      .clean strong {
+        color: var(--success);
+      }
+      .warnings strong {
+        color: var(--warning);
+      }
+      .rejected strong {
+        color: var(--danger);
+      }
+      .details {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 18px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      th,
+      td {
+        padding: 10px 0;
+        border-bottom: 1px solid var(--line);
+        text-align: left;
+      }
+      th:last-child,
+      td:last-child {
+        text-align: right;
+      }
+      .empty {
+        color: var(--muted);
+      }
+      footer {
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 12px;
+        text-align: center;
+      }
+      @media (max-width: 760px) {
+        header,
+        .details {
+          display: block;
+        }
+        .score {
+          margin-top: 16px;
+          text-align: left;
+        }
+        .cards {
+          grid-template-columns: 1fr 1fr;
+        }
+        section + section {
+          margin-top: 18px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div>
+          <h1>Ticket CSV quality report</h1>
+          <p>{{ report.source.filename }} · {{ report.source.encoding }} · delimiter “{{ report.source.delimiter }}”</p>
+        </div>
+        <div class="score">
+          {{ "%.2f"|format(report.summary.quality_score) }}
+          <small>quality score / 100</small>
+        </div>
+      </header>
+
+      <div class="cards">
+        <div class="card">
+          <span>Input rows</span>
+          <strong>{{ report.summary.input_rows }}</strong>
+        </div>
+        <div class="card clean">
+          <span>Clean</span>
+          <strong>{{ report.summary.clean_rows }}</strong>
+        </div>
+        <div class="card warnings">
+          <span>Warnings</span>
+          <strong>{{ report.summary.warning_rows }}</strong>
+        </div>
+        <div class="card rejected">
+          <span>Rejected</span>
+          <strong>{{ report.summary.rejected_rows }}</strong>
+        </div>
+      </div>
+
+      <div class="details">
+        <section>
+          <h2>Error categories</h2>
+          {% if report.summary.error_counts %}
+            <table>
+              <thead><tr><th>Rule</th><th>Rows</th></tr></thead>
+              <tbody>
+                {% for code, count in report.summary.error_counts.items() %}
+                  <tr><td>{{ code }}</td><td>{{ count }}</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p class="empty">No validation errors.</p>
+          {% endif %}
+        </section>
+
+        <section>
+          <h2>Warning categories</h2>
+          {% if report.summary.warning_counts %}
+            <table>
+              <thead><tr><th>Rule</th><th>Rows</th></tr></thead>
+              <tbody>
+                {% for code, count in report.summary.warning_counts.items() %}
+                  <tr><td>{{ code }}</td><td>{{ count }}</td></tr>
+                {% endfor %}
+              </tbody>
+            </table>
+          {% else %}
+            <p class="empty">No review warnings.</p>
+          {% endif %}
+        </section>
+      </div>
+
+      <footer>Generated at {{ report.generated_at }} · Report excludes ticket row content.</footer>
+    </main>
+  </body>
+</html>

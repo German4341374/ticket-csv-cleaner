@@ -1,0 +1,33 @@
+column_mapping: {}
+
+status_mapping:
+  new: Open
+  open: Open
+  working: In Progress
+  pending: In Progress
+  solved: Resolved
+  closed: Closed
+
+priority_mapping:
+  p4: Low
+  p3: Medium
+  p2: High
+  p1: Critical
+
+required_fields:
+  - ticket_id
+  - title
+  - status
+  - priority
+  - requester_email
+  - created_at
+
+date_formats:
+  - "%Y-%m-%dT%H:%M:%S%z"
+  - "%Y-%m-%d %H:%M:%S"
+  - "%d.%m.%Y %H:%M"
+  - "%m/%d/%Y %I:%M %p"
+
+day_first: false
+mask_personal_data: true
+probable_duplicate_threshold: 0.88
