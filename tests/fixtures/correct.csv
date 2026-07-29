@@ -1,0 +1,3 @@
+ticket_id,title,description,status,priority,requester_email,assignee,created_at,resolved_at
+INC-001,Login issue," Needs investigation ",open,high,person1@example.test,Analyst One,2026-01-10 09:00:00,
+INC-002,Printer fixed,Driver reinstalled,resolved,medium,person2@example.test,Analyst Two,10.01.2026 10:00,10.01.2026 10:30

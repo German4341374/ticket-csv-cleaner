@@ -1,0 +1,4 @@
+ticket_id,title,description,status,priority,requester_email,assignee,created_at,resolved_at
+INC-020,VPN connection timeout,First report,open,high,person1@example.test,Analyst,2026-02-01 09:00:00,
+INC-020,Other issue,Exact ID duplicate,open,low,person2@example.test,Analyst,2026-02-01 10:00:00,
+INC-022,VPN connection timeout!,Probable title duplicate,open,high,person1@example.test,Analyst,2026-02-01 11:00:00,

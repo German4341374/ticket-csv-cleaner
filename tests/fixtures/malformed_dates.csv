@@ -1,0 +1,3 @@
+ticket_id,title,description,status,priority,requester_email,assignee,created_at,resolved_at
+INC-010,Bad created date,Test row,open,low,person1@example.test,Analyst,not-a-date,
+INC-011,Bad date order,Test row,closed,medium,person2@example.test,Analyst,2026-03-10 12:00:00,2026-03-10 11:00:00

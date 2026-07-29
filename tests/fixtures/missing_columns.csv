@@ -1,0 +1,2 @@
+ticket_id,title,status,priority,requester_email,created_at
+INC-040,Incomplete header,open,low,person4@example.test,2026-05-01

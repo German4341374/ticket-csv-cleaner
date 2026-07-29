@@ -1,0 +1,2 @@
+ticket_id;title;description;status;priority;requester_email;assignee;created_at;resolved_at
+INC-030;Email problem;Mailbox unavailable;pending;p3;person3@example.test;Analyst;2026-04-01 08:00:00;
