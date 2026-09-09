@@ -4,9 +4,12 @@
 [![Python](https://img.shields.io/badge/Python-3.12%2B-3776AB?logo=python&logoColor=white)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-`ticket-csv-cleaner` is a typed CLI that validates and cleans Service Desk CSV exports before they are imported into another system. It detects common file-format differences, normalizes ticket data, separates records that need review, masks personal data, and creates audit-friendly HTML and JSON quality reports.
+Moving tickets between systems often means fixing a CSV first.
+This tool trims whitespace, normalizes statuses and dates, finds duplicates, and checks
+for missing or inconsistent fields.
 
-Processing is completely local. The application does not send ticket data to an external service.
+It writes separate files for clean rows, rejected rows, and warnings, along with an HTML
+and JSON report. Processing stays local; nothing is sent to an external service.
 
 ## Problem
 
